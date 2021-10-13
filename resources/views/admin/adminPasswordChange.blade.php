@@ -15,8 +15,8 @@
                 <div class="col">
                     <form action="{{route('admin.update.password')}}" method="POST">
                         <div class="row">
-                            
-                                @csrf
+
+                            @csrf
                             <div class="col-12">
 
                                 <div class="row">
@@ -25,12 +25,13 @@
                                         <div class="form-group">
                                             <h5>Current Password <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input id="current_password" type="password" name="current_password" class="form-control" value="" >
+                                                <input id="current_password" type="password" name="current_password"
+                                                    class="form-control" value="">
                                                 @error('current_password')
-                                                    {{$message}}
+                                                {{$message}}
                                                 @enderror
-                                                    
-                                                
+
+
 
                                             </div>
                                         </div>
@@ -42,7 +43,8 @@
                                         <div class="form-group">
                                             <h5>Change Password <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input id="password" type="password" name="password" value="" class="form-control" >
+                                                <input id="password" type="password" name="password" value=""
+                                                    class="form-control">
                                                 @error('password')
                                                 {{$message}}
                                                 @enderror
@@ -57,7 +59,8 @@
                                         <div class="form-group">
                                             <h5>Confirm Password <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input id="password_confirmation" type="password" name="password_confirmation" value="" class="form-control" >
+                                                <input id="password_confirmation" type="password"
+                                                    name="password_confirmation" value="" class="form-control">
                                                 @error('password_confirmation')
                                                 {{$message}}
                                                 @enderror
@@ -83,16 +86,15 @@
     </div>
     <!-- /.box -->
 
-   <script type="text/javascript">  
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $(document).ready(function(){
-
-            $('#image').change(function(e){
+            $('#image').change(function (e) {
 
                 var reader = new FileReader();
 
-                reader.onload =function(e){
-                $('#show_image').attr('src',e.target.result);
+                reader.onload = function (e) {
+                    $('#show_image').attr('src', e.target.result);
                 };
                 reader.readAsDataURL(e.target.files[0]);
 
@@ -100,9 +102,9 @@
 
         });
 
-    </script> 
+    </script>
 
-    
+
 </section>
 
 @endsection

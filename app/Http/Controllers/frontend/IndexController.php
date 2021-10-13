@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -60,5 +61,37 @@ class IndexController extends Controller
         );
 
         return redirect()->route('user.profile')->with($notification);
+    }
+    public function userChangePassword()
+    {
+        $id = Auth::user()->id;
+
+        $user = User::find($id);
+
+        return view('frontend.profile.change_password', compact('user'));
+    }
+    public function updatePassword(Request $request)
+    {
+
+        $validateData = $request->validate([
+
+            'current_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+
+        $user = User::find(Auth::user()->id);
+
+        if (Hash::check($request->current_password, $user->password)) {
+
+            $user->password = bcrypt($request->password);
+
+            $user->save();
+
+            Auth::logout();
+
+            return redirect()->route('user.logout');
+        } else {
+            return redirect()->back();
+        }
     }
 }

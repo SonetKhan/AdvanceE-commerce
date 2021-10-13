@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 
 use App\Http\Controllers\frontend\IndexController;
+
+use App\Http\Controllers\Backend\BrandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,3 +80,24 @@ Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.l
 Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user.profile');
 
 Route::post('user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
+
+Route::get('user/change/password', [IndexController::class, 'userChangePassword'])->name('change.password');
+
+Route::post('user/update/password', [IndexController::class, 'updatePassword'])->name('update.password');
+
+
+//////////// ...................Brand route.........................
+
+
+Route::prefix('brand')->group(function () {
+
+    Route::get('/view', [BrandController::class, 'viewBrand'])->name('all.brand');
+
+    Route::post('/store', [BrandController::class, 'storeBrand'])->name('brand.store');
+
+    Route::get('/edit/{id}', [BrandController::class, 'editBrand'])->name('brand.edit');
+
+    Route::post('/update', [BrandController::class, 'updateBrand'])->name('brand.update');
+
+    Route::get('/delete/{id}', [BrandController::class, 'deleteBrand'])->name('brand.delete');
+});
